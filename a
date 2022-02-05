@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+    /* Definición de tipos */
+    typedef enum {FALSE, TRUE} bool;
+    /* Predeclaración de acciones */
+    void buscapareja1(int n, int *a, int *b);
+    void buscapareja2(int n, int a, int *b);
+    bool pitagoricos(int h, int c1, int c2);
+
+int main()
+{
+    /* Delcaración de variables */
+    int hipo, cmenor, cmayor;
+    int n, *a, *b;
+    /* Inicio del algoritmo */
+    printf("---=== Bienvenido a la busqueda de parejas pitagoricas ===---\n\n");
+    printf("Nota: Introduce 0 para finalizar.\n\nIndica el primer numero: ");
+    scanf("%d", &hipo);
+    while (hipo != 0)
+    {
+        buscapareja1(n, *a, *b);
+        if (pitagoricos(hipo,cmenor,cmayor))
+            {
+                printf("La pareja pitagorica de %d", hipo);
+                printf("es %d", cmayor);
+                printf("y %d.\n", cmenor);
+            }
+        printf("Indica el siguiente numero: ");
+        scanf("%d", &hipo);
+    }
+    system("PAUSE");
+    return 0;
+}
+
+void buscapareja1(int n, int *a, int *b) {
+    bool encontrado;
+    *a=1;
+    *b=1;
+    encontrado = FALSE;
+    while (*a < n && !encontrado)
+    {
+        buscapareja2(n, *a, b);
+        encontrado = pitagoricos(n, &a, b);
+        if (!encontrado)
+        {
+            *a = *a + 1;
+        }
+    }
+}
+
+void buscapareja2(int n, int a, int *b) {
+    bool encontrado;
+    *b=1;
+    encontrado = FALSE;
+    while (*b < n && !encontrado)
+    {
+        encontrado = pitagoricos(n, a, &b);
+        if (!encontrado)
+        {
+            *b = *b + 1;
+        }
+    }
+}
+
+bool pitagoricos(int h, int c1, int c2){
+    return h*h == c1*c1+c2*c2;
+}
